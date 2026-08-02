@@ -7,7 +7,6 @@ import java.time.LocalDate;
 public record CriarTaskDTO(String titulo,
                            String descricao,
                            LocalDate dataLimite,
-                           Prioridade prioridade,
-                           Status status
-                           ) {
+                           Prioridade prioridade
+) {
 }

@@ -5,9 +5,11 @@ import com.agile.agileAPI.entidades.Status;
 
 import java.time.LocalDate;
 
-public record RecuperarTasksDTO(String titulo,
+public record RecuperarTasksDTO(Long id,
+                                String titulo,
                                 String descricao,
                                 LocalDate dataLimite,
                                 Prioridade prioridade,
-                                Status status) {
+                                Status status,
+                                LocalDate dataCriacao) {
 }
