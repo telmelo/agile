@@ -1,7 +1,7 @@
 package com.agile.agileAPI.entidades;
 
 public enum Status {
-    FINALIZADO,
+    PENDENTE,
     EM_PROGRESSO,
     CONCLUIDA
 }

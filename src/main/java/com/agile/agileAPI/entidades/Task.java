@@ -26,4 +26,60 @@ public class Task {
 
     public Task(){
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public LocalDate getDataLimite() {
+        return dataLimite;
+    }
+
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setDataLimite(LocalDate dataLimite) {
+        this.dataLimite = dataLimite;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
 }
