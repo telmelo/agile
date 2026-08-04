@@ -2,12 +2,15 @@ package com.agile.agileAPI.DTO;
 
 import com.agile.agileAPI.entidades.Prioridade;
 import com.agile.agileAPI.entidades.Status;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record AtualizarTasksDTO(String titulo,
+
+public record AtualizarTasksDTO(@NotBlank String titulo,
                                 String descricao,
-                                LocalDate dataLimite,
-                                Prioridade prioridade,
-                                Status status) {
+                                @NotNull LocalDate dataLimite,
+                                @NotNull Prioridade prioridade,
+                                @NotNull Status status) {
 }
