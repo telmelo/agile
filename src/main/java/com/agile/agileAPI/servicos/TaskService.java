@@ -1,8 +1,11 @@
 package com.agile.agileAPI.servicos;
 
+import com.agile.agileAPI.DTO.AtualizarTasksDTO;
 import com.agile.agileAPI.DTO.CriarTaskDTO;
 import com.agile.agileAPI.DTO.RecuperarTasksDTO;
+import com.agile.agileAPI.excecoes.TaskNaoEncontrada;
 import com.agile.agileAPI.repositorios.TaskRepository;
+import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Service;
 import com.agile.agileAPI.DTO.TaskMapper;
 import com.agile.agileAPI.entidades.Task;
@@ -47,15 +50,44 @@ public class TaskService {
         return listaDeDtos;
     }
 
-    public RecuperarTasksDTO buscarPorId(Long id){
+    public RecuperarTasksDTO buscarPorId(Long id)  {
         Optional<Task> taskPorId = taskRepository.findById(id);
 
         if (taskPorId.isEmpty()){
-            //lança exceção
+            throw new TaskNaoEncontrada("Tarefa com id " + id + " não encontrada");
         }else {
-            taskPorId.stream().map(task -> taskMapper.retornarTasksDTO(task));
+            Task task = taskPorId.get();
+
+            RecuperarTasksDTO taskDTO = taskMapper.retornarTasksDTO(task);
+
+            return taskDTO;
+        }
+    }
+
+    public RecuperarTasksDTO atualizarTask(Long id, AtualizarTasksDTO atualizarTasksDTO) {
+        Optional<Task> taskPorId = taskRepository.findById(id);
+
+        if (taskPorId.isEmpty()){
+            throw new TaskNaoEncontrada("Task com id " + id + " não encontrada");
+        }else {
+            Task task = taskPorId.get();
+
+            taskMapper.mapAtualizarTaskDTOToTask(atualizarTasksDTO, task);
+
+            task = taskRepository.save(task);
+
+            RecuperarTasksDTO dto = taskMapper.retornarTasksDTO(task);
+
+            return dto;
         }
 
-        return taskPorId;
+    }
+
+    public void deletarTask(Long id){
+        if (taskRepository.existsById(id)){
+            taskRepository.deleteById(id);
+        }else {
+            throw new TaskNaoEncontrada("Task com id " + id + " não encontrada");
+        }
     }
 }
