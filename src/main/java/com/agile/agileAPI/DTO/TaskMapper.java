@@ -8,9 +8,9 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface TaskMapper {
 
-    @Mapping(target = "id", ignore = True)
-    @Mapping(target = "dataCriacao", ignore = True)
-    @Mapping(target = "googleEventId", ignore = True)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dataCriacao", ignore = true)
+    @Mapping(target = "googleEventId", ignore = true)
     void mapAtualizarTaskDTOToTask(AtualizarTasksDTO dto, @MappingTarget Task task);
 
     RecuperarTasksDTO retornarTasksDTO(Task task);
