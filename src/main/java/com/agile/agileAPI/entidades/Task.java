@@ -23,6 +23,7 @@ public class Task {
     private Prioridade prioridade;
     private Status status;
     private LocalDate dataCriacao;
+    private String googleEventId;
 
     public Task(){
     }
