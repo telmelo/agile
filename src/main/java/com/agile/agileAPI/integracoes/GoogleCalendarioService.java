@@ -28,7 +28,7 @@ import com.google.api.services.calendar.model.EventDateTime;
 
 @Service 
 @ConditionalOnProperty(name = "agile.google-calendar.enabled", havingValue = "true")
-public class GoogleCalendarioService {
+public class GoogleCalendarioService implements IntegracaoCalendario {
     private final Calendar calendar;
     private final String calendarId;
 
@@ -50,7 +50,7 @@ public class GoogleCalendarioService {
         }
     }
 
-    private Event montarTask(Task task){
+    private Event montarEvento(Task task){
         Event evento = new Event();
 
         evento.setSummary("[" + task.getPrioridade() + "] " + task.getTitulo());
@@ -72,5 +72,34 @@ public class GoogleCalendarioService {
         .setPrivate(Map.of("taskId", String.valueOf(task.getId()))));
 
         return evento;
+    }
+
+    @Override
+    public String criarEvento(Task task){
+        try {
+            Event criado = calendar.events().insert(calendarId, montarEvento(task)).execute();
+
+            return criado.getId();
+        }catch (IOException e) {
+            throw new IntegracaoCalendarioException("Não foi possível criar o evento da task", e);
+        }
+    }
+
+    @Override
+    public void atualizarEvento(Task task){
+        try {
+            calendar.events().patch(calendarId, task.getGoogleEventId(), montarEvento(task)).execute();
+        } catch (IOException e) {
+            throw new IntegracaoCalendarioException("Não foi possível atualizar o evento da task", e);
+        }
+    }
+
+    @Override
+    public void removerEvento(String googleEventId){
+        try {
+            calendar.events().delete(calendarId, googleEventId).execute();
+        } catch (IOException e) {
+            throw new IntegracaoCalendarioException("Não foi possível remover o evento da task", e);
+        }
     }
 }

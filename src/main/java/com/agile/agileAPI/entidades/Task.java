@@ -56,8 +56,16 @@ public class Task {
         return dataCriacao;
     }
 
+    public String getGoogleEventId(){
+        return googleEventId;
+    }
+
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setGoogleEventId(String googleEventId){
+        this.googleEventId = googleEventId;
     }
 
     public void setTitulo(String titulo) {
