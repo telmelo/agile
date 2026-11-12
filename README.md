@@ -202,10 +202,10 @@ The `application-local.properties` file and the Service Account keys are listed 
 
 ## Things to take notice of
 
-- It is worth noting that, at least for now, the integration via Google Calendar is one-way: this means that changes made directly made in the Calendar interface are not sent to the API
+- It is worth noting that, at least for now, the integration via Google Calendar is one-way: this means that changes made directly through the Calendar interface are not sent back to the API
 - For now, user authentication isn't avaiable. Its currently being thought of implementing it through OAuth2
 
 
 ## 
 
-This code in this project was written by Telmo Melo: [github.com/telmelo](https://github.com/telmelo)
+The code in this project was written by Telmo Melo: [github.com/telmelo](https://github.com/telmelo)
